@@ -226,5 +226,52 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Scroll automático tras inactividad
+    (function() {
+        let inactivityTimeout;
+        let autoScrollActive = false;
+        let scrollInterval;
+        let scrollBackTimeout;
+
+        function startAutoScroll() {
+            if (autoScrollActive) return;
+            autoScrollActive = true;
+            scrollInterval = setInterval(() => {
+                window.scrollBy({ top: 2, behavior: 'smooth' });
+                // Si llegó al final
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
+                    clearInterval(scrollInterval);
+                    scrollBackTimeout = setTimeout(() => {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        setTimeout(() => {
+                            autoScrollActive = false;
+                            resetInactivityTimer();
+                        }, 1000); // Espera a que suba
+                    }, 5000); // Espera 5s al final
+                }
+            }, 20); // Scroll lento
+        }
+
+        function stopAutoScroll() {
+            autoScrollActive = false;
+            clearInterval(scrollInterval);
+            clearTimeout(scrollBackTimeout);
+        }
+
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimeout);
+            if (autoScrollActive) stopAutoScroll();
+            inactivityTimeout = setTimeout(startAutoScroll, 10000); // 10s
+        }
+
+        // Detectar actividad del usuario
+        ['scroll', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
+            window.addEventListener(evt, resetInactivityTimer, { passive: true });
+        });
+
+        // Iniciar timer al cargar
+        resetInactivityTimer();
+    })();
+
     console.log('NIRA - Página web cargada exitosamente');
 }); 
