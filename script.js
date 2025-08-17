@@ -68,8 +68,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Botones de acción
-    const downloadButton = document.querySelector('button:contains("Descargar App")');
-    const infoButton = document.querySelector('button:contains("Más Información")');
+    const downloadButton = document.querySelector('.btn-descargar-app');
+    // const infoButton = document.querySelector('button:contains("Más Información")'); // ya no se usa
 
     if (downloadButton) {
         downloadButton.addEventListener('click', function() {
@@ -236,23 +236,27 @@ document.addEventListener('DOMContentLoaded', function() {
         function startAutoScroll() {
             if (autoScrollActive) return;
             autoScrollActive = true;
+            console.log('Scroll automático INICIADO');
             scrollInterval = setInterval(() => {
-                window.scrollBy({ top: 2, behavior: 'smooth' });
+                window.scrollBy({ top: 20, behavior: 'smooth' }); // velocidad aumentada para pruebas
                 // Si llegó al final
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
                     clearInterval(scrollInterval);
+                    console.log('Scroll automático llegó al final, espera 5s');
                     scrollBackTimeout = setTimeout(() => {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
+                        console.log('Scroll automático vuelve al inicio');
                         setTimeout(() => {
                             autoScrollActive = false;
                             resetInactivityTimer();
                         }, 1000); // Espera a que suba
                     }, 5000); // Espera 5s al final
                 }
-            }, 20); // Scroll lento
+            }, 20); // Scroll más rápido
         }
 
         function stopAutoScroll() {
+            if (autoScrollActive) console.log('Scroll automático DETENIDO por actividad');
             autoScrollActive = false;
             clearInterval(scrollInterval);
             clearTimeout(scrollBackTimeout);
