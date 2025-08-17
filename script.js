@@ -259,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // Detectar actividad del usuario
-        ['scroll', 'mousedown', 'keydown', 'touchstart'].forEach(evt => {
+        ['mousedown', 'keydown', 'touchstart'].forEach(evt => {
             window.addEventListener(evt, resetInactivityTimer, { passive: true });
         });
 
