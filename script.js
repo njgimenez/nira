@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
             autoScrollActive = true;
             console.log('Scroll automático INICIADO');
             scrollInterval = setInterval(() => {
-                window.scrollBy({ top: 20, behavior: 'smooth' }); // velocidad aumentada para pruebas
+                window.scrollBy({ top: 3, behavior: 'smooth' }); // velocidad aumentada para pruebas
                 // Si llegó al final
                 if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 2) {
                     clearInterval(scrollInterval);
