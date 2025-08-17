@@ -78,16 +78,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    if (infoButton) {
-        infoButton.addEventListener('click', function() {
-            // Scroll suave a la sección de características
-            const caracteristicasSection = document.getElementById('caracteristicas');
-            if (caracteristicasSection) {
-                caracteristicasSection.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
-
     // Contador animado para estadísticas (opcional)
     function animateCounter(element, target, duration = 2000) {
         let start = 0;
