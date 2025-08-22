@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (downloadButton) {
         downloadButton.addEventListener('click', function() {
             // Aquí se puede agregar la lógica para descargar la app
-            alert('¡Gracias por tu interés en NIRA! Próximamente disponible para descarga.');
+            alert('"Versión Beta: la descarga puede aparecer como no segura, pero es segura. Confía en nosotros."');
         });
     }
 
